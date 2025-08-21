@@ -1,0 +1,77 @@
+<!-- Preloader -->
+<div id="preloader">
+    <div class="loader-text"></div>
+  </div>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+  
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+  
+    #preloader .loader-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      color: #222;
+      display: flex;
+      gap: 2px;
+    }
+  
+    .letter {
+      opacity: 0;
+      transform: translateY(20px);
+      display: inline-block;
+      animation: riseFade 0.5s forwards;
+    }
+  
+    
+    @keyframes riseFade {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    #preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+  </style>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const text = "New Vibes in Music";
+      const container = document.querySelector(".loader-text");
+  
+      // create a <span> for each letter in the text with increasing delay
+      text.split("").forEach((char, i) => {
+        const span = document.createElement("span");
+        span.textContent = char === " " ? "\u00A0" : char;
+        span.classList.add("letter");
+        span.style.animationDelay = `${i * 0.15}s`; //delay increase per letter
+        container.appendChild(span);
+      });
+    });
+  
+    //When the page is fully loaded, fade out the preloader
+    window.addEventListener("load", function() {
+      setTimeout(() => {
+        document.getElementById("preloader").classList.add("fade-out");
+      }, 3500); // Adjust the timeout as needed
+    });
+  </script>
